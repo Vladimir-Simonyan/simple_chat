@@ -14,9 +14,11 @@
 void * receiver(void * sock)
 {
 	char rbuffer[1024] = { 0 };
-	while(read(*((int *)sock), rbuffer, 1024) > 0)
+	int pix;
+	while((pix = read(*((int *)sock), rbuffer, 1024)) > 0)
 	{
-		std::cout << "He: " << rbuffer << "\n";
+		rbuffer[pix] = '\0';
+		std::cout << "He: " << rbuffer << std::endl;
 		//std::cout << ">  ";  
 	} 
 	std::cout << "Connection failed \n";
